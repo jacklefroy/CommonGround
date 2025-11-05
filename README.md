@@ -176,6 +176,29 @@ npm run dev
 ```
 Once started, the frontend will be available at: `http://localhost:3000`.
 
+### Command-line client (experimental)
+
+You can interact with a running backend directly from the terminal using the
+bundled CLI. The [CLI guide](docs/cli-guide.md) covers setup, options, and
+troubleshooting in depth; the quick-start version is below.
+
+```bash
+uv run common-ground-cli --prompt "Help me summarise the latest run"
+```
+
+What happens behind the scenes:
+
+1. `POST /session` mints a temporary session id.
+2. The CLI connects to `ws://<host>:8000/ws/{session_id}` and waits for the run
+   to become ready.
+3. A `partner_interaction` run starts and the Partner's responses stream back
+   to your terminal.
+
+After the first reply you can keep chatting at the `you>` prompt. Type `/quit`
+or `/exit` to leave, or send raw JSON commands with `/raw {"type": ...}` for
+advanced workflows. Interactive messaging currently targets
+`partner_interaction`/`chat_completion` runs; use `/raw` for other run types.
+
 ## 🛠️ Customization & Extensibility
 
 The framework is designed to be easily extended without modifying the core engine. Here are the primary customization points:
