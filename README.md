@@ -178,24 +178,26 @@ Once started, the frontend will be available at: `http://localhost:3000`.
 
 ### Command-line client (experimental)
 
-For quick experiments you can interact with a running backend directly from the
-terminal using the bundled CLI:
+You can interact with a running backend directly from the terminal using the
+bundled CLI. The [CLI guide](docs/cli-guide.md) covers setup, options, and
+troubleshooting in depth; the quick-start version is below.
 
 ```bash
 uv run common-ground-cli --prompt "Help me summarise the latest run"
 ```
 
-The tool will:
+What happens behind the scenes:
 
-1. Call `POST /session` to mint a temporary session id.
-2. Connect to `ws://<host>:8000/ws/{session_id}`.
-3. Launch a `partner_interaction` run and stream the Partner's replies back to
-   your terminal.
+1. `POST /session` mints a temporary session id.
+2. The CLI connects to `ws://<host>:8000/ws/{session_id}` and waits for the run
+   to become ready.
+3. A `partner_interaction` run starts and the Partner's responses stream back
+   to your terminal.
 
-Type follow-up prompts at the `you>` prompt, or send raw JSON commands with
-`/raw {"type": ...}` for advanced workflows. Interactive messaging currently
-targets `partner_interaction`/`chat_completion` runs; use `/raw` for other run
-types.
+After the first reply you can keep chatting at the `you>` prompt. Type `/quit`
+or `/exit` to leave, or send raw JSON commands with `/raw {"type": ...}` for
+advanced workflows. Interactive messaging currently targets
+`partner_interaction`/`chat_completion` runs; use `/raw` for other run types.
 
 ## 🛠️ Customization & Extensibility
 
