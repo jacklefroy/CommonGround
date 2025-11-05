@@ -47,3 +47,6 @@ dependencies = [
     "fastmcp>=0.0.1",
     "light-embed @ git+https://github.com/chux0519/light-embed@b98fc0f1262e0fa4a140f9b2a437b83f79d4158e",
 ]
+
+[project.scripts]
+common-ground-cli = "core.cli:main"
